@@ -1,0 +1,74 @@
+<form (ngSubmit)="enviarFormulario()">
+  <div class="grid grid-cols-2 gap-4">
+    <!-- Nome -->
+    <div>
+      <label for="nome">Nome:</label>
+      <input id="nome" [(ngModel)]="cliente.nome" name="nome" class="form-input" required />
+    </div>
+
+    <!-- Sobrenome -->
+    <div>
+      <label for="sobrenome">Sobrenome:</label>
+      <input id="sobrenome" [(ngModel)]="cliente.sobrenome" name="sobrenome" class="form-input" />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" [(ngModel)]="cliente.email" name="email" type="email" class="form-input" required />
+    </div>
+
+    <!-- Telefone -->
+    <div>
+      <label for="telefone">Telefone:</label>
+      <input id="telefone" [(ngModel)]="cliente.telefone" name="telefone" class="form-input" required />
+    </div>
+
+    <!-- Data de nascimento -->
+    <div>
+      <label for="dataNascimento">Data de Nascimento:</label>
+      <input id="dataNascimento" [(ngModel)]="cliente.dataNascimento" name="dataNascimento" type="date" class="form-input" />
+    </div>
+
+    <!-- CEP -->
+    <div>
+      <label for="cep">CEP:</label>
+      <input id="cep" [(ngModel)]="cliente.endereco.cep" name="cep" class="form-input" (blur)="buscarEnderecoPorCep()" />
+    </div>
+
+    <!-- Logradouro -->
+    <div>
+      <label for="logradouro">Logradouro:</label>
+      <input id="logradouro" [(ngModel)]="cliente.endereco.logradouro" name="logradouro" class="form-input" />
+    </div>
+
+    <!-- Bairro -->
+    <div>
+      <label for="bairro">Bairro:</label>
+      <input id="bairro" [(ngModel)]="cliente.endereco.bairro" name="bairro" class="form-input" />
+    </div>
+
+    <!-- Estado -->
+    <div>
+      <label for="estado">Estado:</label>
+      <input id="estado" [(ngModel)]="cliente.endereco.estado" name="estado" class="form-input" />
+    </div>
+
+    <!-- Cidade -->
+    <div>
+      <label for="localidade">Cidade:</label>
+      <input id="localidade" [(ngModel)]="cliente.endereco.localidade" name="localidade" class="form-input" />
+    </div>
+
+    <!-- Complemento -->
+    <div class="col-span-2">
+      <label for="complemento">Complemento:</label>
+      <input id="complemento" [(ngModel)]="cliente.endereco.complemento" name="complemento" class="form-input" />
+    </div>
+  </div>
+
+  <!-- Botão -->
+  <div>
+    <button type="submit">Adicionar Cliente</button>
+  </div>
+</form>
