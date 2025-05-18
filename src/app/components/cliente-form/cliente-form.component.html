@@ -1,74 +1,124 @@
-<form (ngSubmit)="enviarFormulario()">
-  <div class="grid grid-cols-2 gap-4">
+<form class="flex justify-center bg-gray-100">
+  <div class="w-full max-w-[500px] space-y-4 bg-white p-4 rounded-lg shadow-md">
+    
     <!-- Nome -->
     <div>
-      <label for="nome">Nome:</label>
-      <input id="nome" [(ngModel)]="cliente.nome" name="nome" class="form-input" required />
+      <input
+        type="text"
+        name="nome"
+        placeholder="Nome"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- Sobrenome -->
     <div>
-      <label for="sobrenome">Sobrenome:</label>
-      <input id="sobrenome" [(ngModel)]="cliente.sobrenome" name="sobrenome" class="form-input" />
+      <input
+        type="text"
+        name="sobrenome"
+        placeholder="Sobrenome"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- Email -->
     <div>
-      <label for="email">Email:</label>
-      <input id="email" [(ngModel)]="cliente.email" name="email" type="email" class="form-input" required />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- Telefone -->
     <div>
-      <label for="telefone">Telefone:</label>
-      <input id="telefone" [(ngModel)]="cliente.telefone" name="telefone" class="form-input" required />
+      <input
+        type="text"
+        name="telefone"
+        placeholder="Telefone"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
-    <!-- Data de nascimento -->
+    <!-- Data de Nascimento -->
     <div>
-      <label for="dataNascimento">Data de Nascimento:</label>
-      <input id="dataNascimento" [(ngModel)]="cliente.dataNascimento" name="dataNascimento" type="date" class="form-input" />
+      <input
+        type="date"
+        name="dataNascimento"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- CEP -->
     <div>
-      <label for="cep">CEP:</label>
-      <input id="cep" [(ngModel)]="cliente.endereco.cep" name="cep" class="form-input" (blur)="buscarEnderecoPorCep()" />
+      <input
+        type="text"
+        name="cep"
+        placeholder="CEP"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- Logradouro -->
     <div>
-      <label for="logradouro">Logradouro:</label>
-      <input id="logradouro" [(ngModel)]="cliente.endereco.logradouro" name="logradouro" class="form-input" />
+      <input
+        type="text"
+        name="logradouro"
+        placeholder="Logradouro"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- Bairro -->
     <div>
-      <label for="bairro">Bairro:</label>
-      <input id="bairro" [(ngModel)]="cliente.endereco.bairro" name="bairro" class="form-input" />
+      <input
+        type="text"
+        name="bairro"
+        placeholder="Bairro"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- Estado -->
     <div>
-      <label for="estado">Estado:</label>
-      <input id="estado" [(ngModel)]="cliente.endereco.estado" name="estado" class="form-input" />
+      <input
+        type="text"
+        name="estado"
+        placeholder="Estado"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- Cidade -->
     <div>
-      <label for="localidade">Cidade:</label>
-      <input id="localidade" [(ngModel)]="cliente.endereco.localidade" name="localidade" class="form-input" />
+      <input
+        type="text"
+        name="cidade"
+        placeholder="Cidade"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <!-- Complemento -->
-    <div class="col-span-2">
-      <label for="complemento">Complemento:</label>
-      <input id="complemento" [(ngModel)]="cliente.endereco.complemento" name="complemento" class="form-input" />
+    <div>
+      <input
+        type="text"
+        name="complemento"
+        placeholder="Complemento"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
-  </div>
 
-  <!-- Botão -->
-  <div>
-    <button type="submit">Adicionar Cliente</button>
+    <!-- Botão -->
+    <div class="text-center pt-4">
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-200"
+      >
+        Adicionar Cliente
+      </button>
+    </div>
+
   </div>
 </form>

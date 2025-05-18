@@ -9,7 +9,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './cliente-form.component.html',
-  styleUrls: ['./cliente-form.component.scss'],
 })
 export class ClienteFormComponent {
   @Output() submitCliente = new EventEmitter<Cliente>();
