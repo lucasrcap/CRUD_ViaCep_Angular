@@ -1,4 +1,4 @@
-<form class="flex justify-center bg-gray-100">
+<form (ngSubmit)="enviarFormulario()" class="flex justify-center bg-gray-100">
   <div class="w-full max-w-[500px] space-y-4 bg-white p-4 rounded-lg shadow-md">
     
     <!-- Nome -->
@@ -6,6 +6,7 @@
       <input
         type="text"
         name="nome"
+        [(ngModel)]="cliente.nome"
         placeholder="Nome"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -16,6 +17,7 @@
       <input
         type="text"
         name="sobrenome"
+        [(ngModel)]="cliente.sobrenome"
         placeholder="Sobrenome"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -26,6 +28,7 @@
       <input
         type="email"
         name="email"
+        [(ngModel)]="cliente.email"
         placeholder="Email"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -36,6 +39,7 @@
       <input
         type="text"
         name="telefone"
+        [(ngModel)]="cliente.telefone"
         placeholder="Telefone"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -46,6 +50,7 @@
       <input
         type="date"
         name="dataNascimento"
+        [(ngModel)]="cliente.dataNascimento"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
     </div>
@@ -55,6 +60,8 @@
       <input
         type="text"
         name="cep"
+        [(ngModel)]="cliente.endereco.cep"
+        (blur)="buscarEnderecoPorCep()"
         placeholder="CEP"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -65,6 +72,7 @@
       <input
         type="text"
         name="logradouro"
+        [(ngModel)]="cliente.endereco.logradouro"
         placeholder="Logradouro"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -75,6 +83,7 @@
       <input
         type="text"
         name="bairro"
+        [(ngModel)]="cliente.endereco.bairro"
         placeholder="Bairro"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -85,6 +94,7 @@
       <input
         type="text"
         name="estado"
+        [(ngModel)]="cliente.endereco.estado"
         placeholder="Estado"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -94,7 +104,8 @@
     <div>
       <input
         type="text"
-        name="cidade"
+        name="localidade"
+        [(ngModel)]="cliente.endereco.localidade"
         placeholder="Cidade"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -105,6 +116,7 @@
       <input
         type="text"
         name="complemento"
+        [(ngModel)]="cliente.endereco.complemento"
         placeholder="Complemento"
         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />

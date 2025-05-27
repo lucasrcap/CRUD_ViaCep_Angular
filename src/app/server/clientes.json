@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nome": "lucas",
+    "sobrenome": "Silva",
+    "email": "lucasramoscapuano@gmail.com",
+    "telefone": "11999999999",
+    "dataNascimento": "",
+    "endereco": {
+      "cep": "09663-090",
+      "logradouro": "Rua Antônio Ângelo Cuzziol",
+      "bairro": "Taboão",
+      "estado": "SP",
+      "localidade": "São Bernardo do Campo",
+      "complemento": "(Suisso)"
+    }
+  }
+]

@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.services';
 import { ClienteFormComponent } from '../../components/cliente-form/cliente-form.component';
+import { TelefonePipe } from '../../pipe/telefone.pipe';
 
 @Component({
   selector: 'app-clientes-page',
   standalone: true,
-  imports: [CommonModule, ClienteFormComponent],
+  imports: [CommonModule, ClienteFormComponent, TelefonePipe],
   templateUrl: './clientes-page.component.html',
 })
 export class ClientesPageComponent implements OnInit {
@@ -45,3 +46,5 @@ export class ClientesPageComponent implements OnInit {
     });
   }
 }
+
+

@@ -4,7 +4,7 @@ export interface Endereco {
   bairro: string;
   estado: string;
   localidade: string;
-  complemento?: string;
+  complemento: string;
 }
 
 export interface Cliente {

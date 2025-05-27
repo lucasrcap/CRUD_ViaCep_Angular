@@ -28,7 +28,7 @@
           {{ cliente.nome }} {{ cliente.sobrenome }}
         </h3>
         <p><strong>Email:</strong> {{ cliente.email }}</p>
-        <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+        <p><strong>Telefone:</strong> {{ cliente.telefone | telefoneFormatado }}</p>
         <p><strong>Data de Nascimento:</strong> {{ cliente.dataNascimento }}</p>
 
         <!-- Endereço -->
