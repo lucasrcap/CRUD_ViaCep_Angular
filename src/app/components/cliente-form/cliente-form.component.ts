@@ -55,9 +55,12 @@ export class ClienteFormComponent {
       return;
     }
 
-    const clienteCopiado = { ...this.cliente, id: Date.now() };
+    const clienteCopiado = { ...this.cliente };
     this.submitCliente.emit(clienteCopiado);
+    this.resetarFormulario();
+  }
 
+  resetarFormulario() {
     this.cliente = {
       id: 0,
       nome: '',
