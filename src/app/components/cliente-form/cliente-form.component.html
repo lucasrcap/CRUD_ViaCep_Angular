@@ -1,136 +1,66 @@
-<form (ngSubmit)="enviarFormulario()" class="flex justify-center bg-gray-100">
-  <div class="w-full max-w-[500px] space-y-4 bg-white p-4 rounded-lg shadow-md">
-    
-    <!-- Nome -->
-    <div>
-      <input
-        type="text"
-        name="nome"
-        [(ngModel)]="cliente.nome"
-        placeholder="Nome"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+<div class="form-wrapper">
+  <div class="form-container">
+    <mat-horizontal-stepper linear [disableRipple]="false">
+      <!-- Step 1 - Informações Pessoais -->
+      <mat-step [stepControl]="personalForm" [editable]="true">
+        <form [formGroup]="personalForm">
+          <ng-template matStepLabel>Informações Pessoais</ng-template>
 
-    <!-- Sobrenome -->
-    <div>
-      <input
-        type="text"
-        name="sobrenome"
-        [(ngModel)]="cliente.sobrenome"
-        placeholder="Sobrenome"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <div class="step-content">
+          <!-- Nome -->
+          <input class="input-custom" placeholder="Nome" formControlName="nome" />
 
-    <!-- Email -->
-    <div>
-      <input
-        type="email"
-        name="email"
-        [(ngModel)]="cliente.email"
-        placeholder="Email"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <!-- Sobrenome -->
+          <input class="input-custom" placeholder="Sobrenome" formControlName="sobrenome" />
 
-    <!-- Telefone -->
-    <div>
-      <input
-        type="text"
-        name="telefone"
-        [(ngModel)]="cliente.telefone"
-        placeholder="Telefone"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <!-- Email -->
+          <input class="input-custom" placeholder="Email" type="email" formControlName="email" />
 
-    <!-- Data de Nascimento -->
-    <div>
-      <input
-        type="date"
-        name="dataNascimento"
-        [(ngModel)]="cliente.dataNascimento"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <!-- Telefone -->
+          <input class="input-custom" placeholder="Telefone" formControlName="telefone" mask="(00) 00000-0000"  />
 
-    <!-- CEP -->
-    <div>
-      <input
-        type="text"
-        name="cep"
-        [(ngModel)]="cliente.endereco.cep"
-        (blur)="buscarEnderecoPorCep()"
-        placeholder="CEP"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <!-- Data de Nascimento -->
+          <input class="input-custom" placeholder="Data de Nascimento" formControlName="dataNascimento" mask="00/00/0000"/>
 
-    <!-- Logradouro -->
-    <div>
-      <input
-        type="text"
-        name="logradouro"
-        [(ngModel)]="cliente.endereco.logradouro"
-        placeholder="Logradouro"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <div class="button-group">
+            <button mat-button color="warn" type="button" (click)="personalForm.reset()">Apagar</button>
+            <button mat-raised-button color="primary" matStepperNext>Próxima</button>
+          </div>
+          </div>
+        </form>
+      </mat-step>
 
-    <!-- Bairro -->
-    <div>
-      <input
-        type="text"
-        name="bairro"
-        [(ngModel)]="cliente.endereco.bairro"
-        placeholder="Bairro"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+      <!-- Step 2 - Endereço -->
+      <mat-step [stepControl]="addressForm" [editable]="false">
+        <form [formGroup]="addressForm">
+          <ng-template matStepLabel>Endereço</ng-template>
 
-    <!-- Estado -->
-    <div>
-      <input
-        type="text"
-        name="estado"
-        [(ngModel)]="cliente.endereco.estado"
-        placeholder="Estado"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <div class="step-content">
+          <!-- CEP -->
+          <input class="input-custom" placeholder="CEP" formControlName="cep" mask="00000-000" (blur)="buscarEnderecoPorCep()" />
 
-    <!-- Cidade -->
-    <div>
-      <input
-        type="text"
-        name="localidade"
-        [(ngModel)]="cliente.endereco.localidade"
-        placeholder="Cidade"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <!-- Logradouro -->
+          <input class="input-custom" placeholder="Logradouro" formControlName="logradouro" />
 
-    <!-- Complemento -->
-    <div>
-      <input
-        type="text"
-        name="complemento"
-        [(ngModel)]="cliente.endereco.complemento"
-        placeholder="Complemento"
-        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+          <!-- Bairro -->
+          <input class="input-custom" placeholder="Bairro" formControlName="bairro" />
 
-    <!-- Botão -->
-    <div class="text-center pt-4">
-      <button
-        type="submit"
-        class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-200"
-      >
-        Adicionar Cliente
-      </button>
-    </div>
+          <!-- Estado -->
+          <input class="input-custom" placeholder="Estado" formControlName="estado" />
 
+          <!-- Cidade -->
+          <input class="input-custom" placeholder="Cidade" formControlName="localidade" />
+
+          <!-- Complemento -->
+          <input class="input-custom" placeholder="Complemento" formControlName="complemento" />
+          <div class="button-group">
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button color="warn" type="button" (click)="addressForm.reset()">Apagar</button>
+            <button mat-raised-button color="primary" type="submit" (click)="enviarFormulario()">Salvar Cliente</button>
+          </div>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
   </div>
-</form>
+</div>

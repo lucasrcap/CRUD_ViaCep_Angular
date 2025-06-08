@@ -20,7 +20,7 @@
           class="absolute top-2 right-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
           (click)="onDeleteCliente(cliente.id)"
         >
-          <i class="pi pi-trash"></i>
+          <mat-icon>restore_from_trash</mat-icon>
         </button>
 
         <!-- Dados do Cliente -->
@@ -28,7 +28,7 @@
           {{ cliente.nome }} {{ cliente.sobrenome }}
         </h3>
         <p><strong>Email:</strong> {{ cliente.email }}</p>
-        <p><strong>Telefone:</strong> {{ cliente.telefone | telefoneFormatado }}</p>
+        <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
         <p><strong>Data de Nascimento:</strong> {{ cliente.dataNascimento }}</p>
 
         <!-- Endereço -->
@@ -46,6 +46,6 @@
   </div>
 
   <div *ngIf="!loading && clientes.length === 0" class="text-center mt-4 text-gray-500">
-    Nenhum cliente cadastrado ainda.
+    Nenhum cliente cadastrado.
   </div>
 </div>

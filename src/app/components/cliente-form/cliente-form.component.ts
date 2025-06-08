@@ -1,81 +1,98 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Cliente } from '../../models/cliente.model';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MatStepperModule, MatStepperPrevious } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { provideNgxMask } from 'ngx-mask';
+
 
 @Component({
   selector: 'app-cliente-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
+  providers: [provideNgxMask()],
   templateUrl: './cliente-form.component.html',
+  styleUrls: ['./cliente-form.component.css'],
+  encapsulation: ViewEncapsulation.None, 
 })
+
 export class ClienteFormComponent {
   @Output() submitCliente = new EventEmitter<Cliente>();
 
-  cliente: Cliente = {
-    id: 0,
-    nome: '',
-    sobrenome: '',
-    email: '',
-    telefone: '',
-    dataNascimento: '',
-    endereco: {
-      cep: '',
-      logradouro: '',
-      bairro: '',
-      estado: '',
-      localidade: '',
-      complemento: ''
-    }
-  };
+    personalForm!: FormGroup;
+    addressForm!: FormGroup;
 
-  constructor(private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.initForms();
+  }
+
+  private initForms() {
+    this.personalForm = this.fb.group({
+      nome: ['', Validators.required],
+      sobrenome: [''],
+      email: ['', [Validators.required, Validators.email]],
+      telefone: ['', Validators.required],
+      dataNascimento: ['']
+    });
+
+    this.addressForm = this.fb.group({
+      cep: ['', Validators.required],
+      logradouro: [''],
+      bairro: [''],
+      estado: [''],
+      localidade: [''],
+      complemento: ['']
+    });
+  }
 
   buscarEnderecoPorCep() {
-    const cep = this.cliente.endereco.cep.replace(/\D/g, '');
+    const cep = this.addressForm.get('cep')?.value.replace(/\D/g, '');
     if (cep.length !== 8) return;
 
     this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
       next: (data) => {
         if (data.erro) return;
-        this.cliente.endereco.logradouro = data.logradouro;
-        this.cliente.endereco.bairro = data.bairro;
-        this.cliente.endereco.estado = data.uf;
-        this.cliente.endereco.localidade = data.localidade;
-        this.cliente.endereco.complemento = data.complemento;
+        this.addressForm.patchValue({
+          logradouro: data.logradouro,
+          bairro: data.bairro,
+          estado: data.uf,
+          localidade: data.localidade,
+          complemento: data.complemento
+        });
       },
       error: (err) => console.error('Erro ao buscar CEP:', err)
     });
   }
 
   enviarFormulario() {
-    if (!this.cliente.nome || !this.cliente.email || !this.cliente.telefone) {
-      alert('Preencha os campos obrigatórios.');
+    if (this.personalForm.invalid || this.addressForm.invalid) {
+      alert('Preencha todos os campos obrigatórios.');
       return;
     }
 
-    const clienteCopiado = { ...this.cliente };
-    this.submitCliente.emit(clienteCopiado);
-    this.resetarFormulario();
-  }
-
-  resetarFormulario() {
-    this.cliente = {
+    const cliente: Cliente = {
       id: 0,
-      nome: '',
-      sobrenome: '',
-      email: '',
-      telefone: '',
-      dataNascimento: '',
-      endereco: {
-        cep: '',
-        logradouro: '',
-        bairro: '',
-        estado: '',
-        localidade: '',
-        complemento: ''
-      }
+      ...this.personalForm.value,
+      endereco: this.addressForm.value
     };
+
+    this.submitCliente.emit(cliente);
+
+    this.personalForm.reset();
+    this.addressForm.reset();
   }
 }

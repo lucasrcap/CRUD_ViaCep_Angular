@@ -1,0 +1,54 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-custom {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: white;
+  color: #000;
+  outline: none;
+}
+
+input::placeholder {
+  color: #999;
+  opacity: 1;
+  font-size: 14px;
+}
+
+.input-custom:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+}
+
+.mat-step-header .mat-step-icon.mat-step-icon-state-done {
+  display: none;
+}
+
+.step-content {
+  margin-top: 24px;
+}

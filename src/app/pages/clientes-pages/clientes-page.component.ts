@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.services';
 import { ClienteFormComponent } from '../../components/cliente-form/cliente-form.component';
-import { TelefonePipe } from '../../pipe/telefone.pipe';
+import {MatIconModule} from '@angular/material/icon'
+
 
 @Component({
   selector: 'app-clientes-page',
   standalone: true,
-  imports: [CommonModule, ClienteFormComponent, TelefonePipe],
+  imports: [CommonModule, ClienteFormComponent, MatIconModule],
   templateUrl: './clientes-page.component.html',
 })
 export class ClientesPageComponent implements OnInit {
@@ -45,6 +46,7 @@ export class ClientesPageComponent implements OnInit {
       error: (err) => console.error('Erro ao excluir cliente:', err)
     });
   }
+
 }
 
 
