@@ -3,5 +3,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 

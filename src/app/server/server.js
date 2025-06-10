@@ -28,6 +28,25 @@ app.get('/api/clientes', (req, res) => {
   res.json(clientes);
 });
 
+// ✅ PUT /api/clientes/:id
+app.put('/api/clientes/:id', (req, res) => {
+  const clientes = getClientesFromFile();
+  const id = parseInt(req.params.id);
+  const dadosAtualizados = req.body;
+
+  const clienteIndex = clientes.findIndex(cliente => cliente.id === id);
+
+  if (clienteIndex === -1) {
+    return res.status(404).json({ message: 'Cliente não encontrado' });
+  }
+
+  clientes[clienteIndex] = { ...clientes[clienteIndex], ...dadosAtualizados, id };
+
+  saveClientesToFile(clientes);
+
+  return res.json(clientes[clienteIndex]);
+});
+
 // ✅ POST /api/clientes
 app.post('/api/clientes', (req, res) => {
   const clientes = getClientesFromFile();
@@ -59,6 +78,8 @@ app.delete('/api/clientes/:id', (req, res) => {
 
   return res.json({ message: 'Cliente excluído com sucesso' });
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);

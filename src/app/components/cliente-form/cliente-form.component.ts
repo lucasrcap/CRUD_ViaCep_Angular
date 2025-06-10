@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 
 @Component({
@@ -23,6 +23,7 @@ import { provideNgxMask } from 'ngx-mask';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    NgxMaskDirective
   ],
   providers: [provideNgxMask()],
   templateUrl: './cliente-form.component.html',
