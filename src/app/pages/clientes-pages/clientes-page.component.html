@@ -1,26 +1,43 @@
 <div class="w-full h-screen p-1 bg-gray-100">
-
-  <h1 class="text-center font-bold text-3xl text-blue-900 bg-blue-200 leading-relaxed">
+  <h1
+    class="text-center font-bold text-3xl text-blue-900 bg-blue-200 leading-relaxed"
+  >
     Gestão de Clientes
   </h1>
 
-  <app-cliente-form (submitCliente)="onCreateCliente($event)"></app-cliente-form>
+  <app-cliente-form
+    [clienteEditavel]="clienteParaEditar"
+    (submitCliente)="onCreateOrUpdateCliente($event)"
+  ></app-cliente-form>
 
   <div *ngIf="loading" class="text-center mt-4 text-gray-600">
     Carregando clientes...
   </div>
 
-  <div *ngIf="!loading && clientes.length > 0" class="bg-white mt-4 p-4 rounded shadow">
+  <div
+    *ngIf="!loading && clientes.length > 0"
+    class="bg-white mt-4 p-4 rounded shadow"
+  >
     <h2 class="text-xl font-semibold mb-4 text-gray-800">Lista de Clientes</h2>
 
     <ul>
-      <li *ngFor="let cliente of clientes" class="relative mb-4 p-4 border border-gray-300 rounded bg-gray-50 shadow-sm">
+      <li
+        *ngFor="let cliente of clientes"
+        class="relative mb-4 p-4 border border-gray-300 rounded bg-gray-50 shadow-sm"
+      >
         <!-- Botão Excluir -->
         <button
           class="absolute top-2 right-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
           (click)="onDeleteCliente(cliente.id)"
         >
           <mat-icon>restore_from_trash</mat-icon>
+        </button>
+        <!-- Botão Editar -->
+        <button
+          class="absolute top-2 right-16 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+          (click)="onEditCliente(cliente)"
+        >
+          <mat-icon>edit</mat-icon>
         </button>
 
         <!-- Dados do Cliente -->
@@ -39,13 +56,18 @@
           <p><strong>Bairro:</strong> {{ cliente.endereco.bairro }}</p>
           <p><strong>Estado:</strong> {{ cliente.endereco.estado }}</p>
           <p><strong>Cidade:</strong> {{ cliente.endereco.localidade }}</p>
-          <p *ngIf="cliente.endereco.complemento"><strong>Complemento:</strong> {{ cliente.endereco.complemento }}</p>
+          <p *ngIf="cliente.endereco.complemento">
+            <strong>Complemento:</strong> {{ cliente.endereco.complemento }}
+          </p>
         </div>
       </li>
     </ul>
   </div>
 
-  <div *ngIf="!loading && clientes.length === 0" class="text-center mt-4 text-gray-500">
+  <div
+    *ngIf="!loading && clientes.length === 0"
+    class="text-center mt-4 text-gray-500"
+  >
     Nenhum cliente cadastrado.
   </div>
 </div>

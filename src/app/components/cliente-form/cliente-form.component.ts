@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -32,7 +32,9 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 })
 
 export class ClienteFormComponent {
+  @Input() clienteEditavel: Cliente | null = null;
   @Output() submitCliente = new EventEmitter<Cliente>();
+
 
     personalForm!: FormGroup;
     addressForm!: FormGroup;
@@ -85,15 +87,15 @@ export class ClienteFormComponent {
       return;
     }
 
-    const cliente: Cliente = {
-      id: 0,
-      ...this.personalForm.value,
-      endereco: this.addressForm.value
-    };
+    const cliente = {
+    ...this.personalForm.value,
+    endereco: this.addressForm.value,
+    id: this.clienteEditavel?.id
+  };
 
-    this.submitCliente.emit(cliente);
-
-    this.personalForm.reset();
-    this.addressForm.reset();
-  }
+  this.submitCliente.emit(cliente);
+  this.personalForm.reset();
+  this.addressForm.reset();
+  this.clienteEditavel = null;
+}
 }
