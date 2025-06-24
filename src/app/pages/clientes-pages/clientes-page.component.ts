@@ -63,7 +63,7 @@ export class ClientesPageComponent implements OnInit {
   }
 
   onEditCliente(cliente: Cliente) {
-  this.clienteParaEditar = cliente;
+  this.clienteParaEditar = JSON.parse(JSON.stringify(cliente));
 }
 
 }

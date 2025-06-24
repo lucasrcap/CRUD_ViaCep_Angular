@@ -1,6 +1,6 @@
 <div class="form-wrapper">
   <div class="form-container">
-    <mat-horizontal-stepper linear [disableRipple]="false">
+    <mat-horizontal-stepper #stepper linear [disableRipple]="false">
       <!-- Step 1 - Informações Pessoais -->
       <mat-step [stepControl]="personalForm" [editable]="true">
         <form [formGroup]="personalForm">

@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Cliente } from '../../models/cliente.model';
-import { MatStepperModule, MatStepperPrevious } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule, MatStepperPrevious } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,13 +31,15 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
   encapsulation: ViewEncapsulation.None, 
 })
 
-export class ClienteFormComponent {
+export class ClienteFormComponent implements OnChanges {
   @Input() clienteEditavel: Cliente | null = null;
   @Output() submitCliente = new EventEmitter<Cliente>();
 
 
     personalForm!: FormGroup;
     addressForm!: FormGroup;
+
+    @ViewChild('stepper') stepper!: MatStepper;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.initForms();
@@ -60,6 +62,36 @@ export class ClienteFormComponent {
       localidade: [''],
       complemento: ['']
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['clienteEditavel'] && this.clienteEditavel) {
+      const c = this.clienteEditavel;
+
+      this.personalForm.patchValue({
+        nome: c.nome,
+        sobrenome: c.sobrenome,
+        email: c.email,
+        telefone: c.telefone,
+        dataNascimento: c.dataNascimento
+      });
+
+      this.addressForm.patchValue({
+        cep: c.endereco?.cep || '',
+        logradouro: c.endereco?.logradouro || '',
+        bairro: c.endereco?.bairro || '',
+        estado: c.endereco?.estado || '',
+        localidade: c.endereco?.localidade || '',
+        complemento: c.endereco?.complemento || ''
+      });
+
+      // Voltar para o primeiro passo ao editar
+      setTimeout(() => {
+        if (this.stepper) {
+          this.stepper.selectedIndex = 0;
+        }
+      });
+    }
   }
 
   buscarEnderecoPorCep() {
@@ -97,5 +129,10 @@ export class ClienteFormComponent {
   this.personalForm.reset();
   this.addressForm.reset();
   this.clienteEditavel = null;
+
+  if (this.stepper) {
+      this.stepper.reset();
+    }
 }
 }
+
