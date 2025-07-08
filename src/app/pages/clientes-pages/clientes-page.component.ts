@@ -35,6 +35,7 @@ export class ClientesPageComponent implements OnInit {
   }
 
   onCreateOrUpdateCliente(cliente: Cliente) {
+
   if (cliente.id) {
     // Cliente já existe, atualizar (PUT)
     this.clienteService.updateCliente(cliente.id, cliente).subscribe({

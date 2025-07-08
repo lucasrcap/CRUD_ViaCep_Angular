@@ -13,6 +13,6 @@ export interface Cliente {
   sobrenome: string;
   email: string;
   telefone: string;
-  dataNascimento: string;
+  dataNascimento: Date;
   endereco: Endereco;
 }

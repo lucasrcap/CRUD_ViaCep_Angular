@@ -123,8 +123,7 @@ export class ClienteFormComponent implements OnChanges {
     ...this.personalForm.value,
     endereco: this.addressForm.value,
     id: this.clienteEditavel?.id
-  };
-
+  }; 
   this.submitCliente.emit(cliente);
   this.personalForm.reset();
   this.addressForm.reset();
