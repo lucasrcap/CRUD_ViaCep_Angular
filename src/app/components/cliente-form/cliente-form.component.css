@@ -52,3 +52,27 @@ input::placeholder {
 .step-content {
   margin-top: 24px;
 }
+
+.input-group {
+  position: relative;
+}
+
+.input-group label {
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  background: white;
+  padding: 0 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.input-custom.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

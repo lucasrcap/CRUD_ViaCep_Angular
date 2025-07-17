@@ -67,6 +67,12 @@ export class ClientesPageComponent implements OnInit {
   this.clienteParaEditar = JSON.parse(JSON.stringify(cliente));
 }
 
+formatarData(data: any): string {
+  if (!data) return '';
+  const dataObj = new Date(data); //qualquer valor passado (mesmo uma string) será convertido em um objeto Date 
+  return dataObj.toLocaleDateString('pt-BR'); // Formatou
+}
+
 }
 
 

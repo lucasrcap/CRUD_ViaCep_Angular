@@ -10,19 +10,35 @@
           <div class="step-content">
           <!-- Nome -->
           <input class="input-custom" placeholder="Nome" formControlName="nome" />
+            <div *ngIf="personalForm.get('nome')?.touched && personalForm.get('nome')?.invalid">
+              <small class="error">Nome é obrigatório.</small>
+            </div>
 
           <!-- Sobrenome -->
           <input class="input-custom" placeholder="Sobrenome" formControlName="sobrenome" />
+            <div *ngIf="personalForm.get('sobrenome')?.touched && personalForm.get('sobrenome')?.invalid">
+              <small class="error">Sobrenome é obrigatório.</small>
+            </div>
 
           <!-- Email -->
           <input class="input-custom" placeholder="Email" type="email" formControlName="email" />
-
+            <div *ngIf="personalForm.get('email')?.touched && personalForm.get('email')?.invalid">
+              <small class="error" *ngIf="personalForm.get('email')?.errors?.['required']">Email é obrigatório.</small>
+              <small class="error" *ngIf="personalForm.get('email')?.errors?.['email']">Formato de email inválido.</small>
+            </div>
           <!-- Telefone -->
           <input class="input-custom" placeholder="Telefone" formControlName="telefone" mask="(00) 00000-0000"/>
+            <div *ngIf="personalForm.get('telefone')?.touched && personalForm.get('telefone')?.invalid">
+              <small class="error">Telefone é obrigatório.</small>
+            </div>
+          <div class="input-group">
+            <label for="dataNascimento">Data de Nascimento</label>
+            <input class="input-custom" type="date" id="dataNascimento" formControlName="dataNascimento" />
+            <div *ngIf="personalForm.get('dataNascimento')?.touched && personalForm.get('dataNascimento')?.invalid">
+                <small class="error">Data de nascimento é obrigatória.</small>
+              </div>
+          </div>
 
-          <!-- Data de Nascimento -->
-          <input class="input-custom" placeholder="Data de Nascimento" formControlName="dataNascimento" mask="00-00-0000"/>
-            
           <div class="button-group">
             <button mat-button color="warn" type="button" (click)="personalForm.reset()">Apagar</button>
             <button mat-raised-button color="primary" matStepperNext>Próxima</button>
@@ -39,19 +55,35 @@
           <div class="step-content">
           <!-- CEP -->
           <input class="input-custom" placeholder="CEP" formControlName="cep" mask="00000-000" (blur)="buscarEnderecoPorCep()" />
+            <div *ngIf="addressForm.get('cep')?.touched && addressForm.get('cep')?.invalid">
+              <small class="error" *ngIf="addressForm.get('cep')?.errors?.['required']">CEP é obrigatório.</small>
+              <small class="error" *ngIf="addressForm.get('cep')?.errors?.['pattern']">CEP inválido (00000-000).</small>
+            </div>
 
           <!-- Logradouro -->
           <input class="input-custom" placeholder="Logradouro" formControlName="logradouro" />
+            <div *ngIf="addressForm.get('logradouro')?.touched && addressForm.get('logradouro')?.invalid">
+              <small class="error">Logradouro é obrigatório.</small>
+            </div>
 
           <!-- Bairro -->
           <input class="input-custom" placeholder="Bairro" formControlName="bairro" />
+            <div *ngIf="addressForm.get('bairro')?.touched && addressForm.get('bairro')?.invalid">
+              <small class="error">Bairro é obrigatório.</small>
+            </div>
 
           <!-- Estado -->
           <input class="input-custom" placeholder="Estado" formControlName="estado" />
+            <div *ngIf="addressForm.get('estado')?.touched && addressForm.get('estado')?.invalid">
+              <small class="error">Estado é obrigatório.</small>
+            </div>
 
           <!-- Cidade -->
           <input class="input-custom" placeholder="Cidade" formControlName="localidade" />
-
+            <div *ngIf="addressForm.get('localidade')?.touched && addressForm.get('localidade')?.invalid">
+              <small class="error">Cidade é obrigatória.</small>
+            </div>
+            
           <!-- Complemento -->
           <input class="input-custom" placeholder="Complemento" formControlName="complemento" />
           <div class="button-group">

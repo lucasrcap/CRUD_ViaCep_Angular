@@ -48,18 +48,18 @@ export class ClienteFormComponent implements OnChanges {
   private initForms() {
     this.personalForm = this.fb.group({
       nome: ['', Validators.required],
-      sobrenome: [''],
+      sobrenome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', Validators.required],
-      dataNascimento: ['']
+      dataNascimento: ['', Validators.required]
     });
 
     this.addressForm = this.fb.group({
       cep: ['', Validators.required],
-      logradouro: [''],
-      bairro: [''],
-      estado: [''],
-      localidade: [''],
+      logradouro: ['', Validators.required],
+      bairro: ['', Validators.required],
+      estado: ['', Validators.required],
+      localidade: ['', Validators.required],
       complemento: ['']
     });
   }
@@ -114,6 +114,9 @@ export class ClienteFormComponent implements OnChanges {
   }
 
   enviarFormulario() {
+    this.personalForm.markAllAsTouched();
+    this.addressForm.markAllAsTouched();
+
     if (this.personalForm.invalid || this.addressForm.invalid) {
       alert('Preencha todos os campos obrigatórios.');
       return;

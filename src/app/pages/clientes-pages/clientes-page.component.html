@@ -46,7 +46,7 @@
         </h3>
         <p><strong>Email:</strong> {{ cliente.email }}</p>
         <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
-        <p><strong>Data de Nascimento:</strong> {{ cliente.dataNascimento }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ formatarData(cliente.dataNascimento) }}</p> 
 
         <!-- Endereço -->
         <div class="mt-2">
